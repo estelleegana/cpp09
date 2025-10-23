@@ -7,14 +7,7 @@ int main(int argc, char **argv)
 		std::cerr << "./btc <input.txt>" << std::endl;
 	else
 	{
-		std::ifstream fichier(argv[1]);
-		if (!fichier)
-			std::cerr << RED << "Error: could not open file." << RESET << std::endl;	
-		else
-		{
-			BitcoinExchange btc;
-			btc.start(argv[1]);
-		}
-		fichier.close();
+		if (parsing_inputfile(argv[1]))
+			calcul(argv[1]);
 	}
 }

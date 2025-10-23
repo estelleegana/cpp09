@@ -3,7 +3,7 @@
 #include <iostream>//std::cout
 #include <fstream>//std::ifstream
 #include <map>
-// #include <string>//std::getline
+#include <cstdlib>//atoi
 
 #define RED "\033[31m"
 #define GREEN "\033[32m"
@@ -22,5 +22,11 @@ class BitcoinExchange
 		BitcoinExchange &operator=(BitcoinExchange &autre);
 		~BitcoinExchange();
 
-		void start(std::string argv);
+		std::map<std::string, float> getData();
+		void setPair(const std::string& date, float value);
 };
+
+bool parsing_inputfile(std::string argv);
+bool parsing_line(std::string &line);
+void calcul(std::string argv);
+void print_map_classic(const std::map<std::string, float>& ma_map);
