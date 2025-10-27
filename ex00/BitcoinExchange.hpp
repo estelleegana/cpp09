@@ -4,6 +4,7 @@
 #include <fstream>//std::ifstream
 #include <map>
 #include <cstdlib>//atoi
+#include <sstream>//ss
 
 #define RED "\033[31m"
 #define GREEN "\033[32m"
@@ -18,15 +19,15 @@ class BitcoinExchange
 		std::map<std::string, float> _data;
 	public:
 		BitcoinExchange();
+		BitcoinExchange(std::string csvfile);
 		BitcoinExchange(const BitcoinExchange &copy);
 		BitcoinExchange &operator=(BitcoinExchange &autre);
 		~BitcoinExchange();
 
-		std::map<std::string, float> getData();
-		void setPair(const std::string& date, float value);
+		void rateXvalue(std::string argv);
+		float getExchangeRate(const std::string &date) const;
+
+		void print_map_classic();
 };
 
-bool parsing_inputfile(std::string argv);
 bool parsing_line(std::string &line);
-void calcul(std::string argv);
-void print_map_classic(const std::map<std::string, float>& ma_map);
