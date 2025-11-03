@@ -27,8 +27,8 @@ class A
 		~A();
 
 		void sort();
-		void sortVector(std::vector<int> V);
-		void sortDeque(std::deque<int> D);
+		void sortVector(std::vector<int> &V);
+		void sortDeque(std::deque<int> &D);
 		void parse(int argc, char **argv);
 		void print_container(std::string container_type);
 };

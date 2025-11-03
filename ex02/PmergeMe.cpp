@@ -35,7 +35,7 @@ void A::parse(int argc, char **argv)
 	_Dsize = _D.size();
 }
 
-void A::sortVector(std::vector<int> V)
+void A::sortVector(std::vector<int> &V)
 {
 	size_t Vsize = V.size();
 	
@@ -66,25 +66,11 @@ void A::sortVector(std::vector<int> V)
 		}
 	}
 
-	std::cout << "\n\ngrands : ";
-	for (size_t g = 0; g < grands.size(); g++)
-		std::cout << grands[g] << " ";
-
-	std::cout << "\npetits : ";
-	for (size_t p = 0; p < petits.size(); p++)
-		std::cout << petits[p] << " ";
-
 	//2 ----------- trier les grands (recursivement)
 	sortVector(grands);
-	// std::cout << "\npetits[0]: " << petits[0];
 
 	//3 ----------- inserer les petits
 	std::vector<int> res = grands;
-	//ajouter le premier petit
-	// if (!petits.empty())
-	// 	res.push_back(petits[0]);
-
-	
 	for (size_t j = 0; j < petits.size(); j++)
 	{
 		std::vector<int>::iterator pos = std::lower_bound(res.begin(), res.end(), petits[j]);
@@ -99,13 +85,10 @@ void A::sortVector(std::vector<int> V)
 	}
 
 	V = res;
-	std::cout << "\n\ntri final: ";
-	for (unsigned int i = 0; i < V.size(); i++)
-			std::cout << V[i] << " ";
-	// _V = V;
+	_V = V;
 }
 
-void A::sortDeque(std::deque<int> D)
+void A::sortDeque(std::deque<int> &D)
 {
 	size_t Dsize = D.size();
 	
@@ -172,11 +155,13 @@ void A::sort()
 	_Dtime = double(Dend - Dstart) / CLOCKS_PER_SEC * 1000000;
 
 
-	// std::cout << bold << "\nAfter: " << RESET;
-	// print_container("vector");
+	std::cout << bold << "\nAfter: " << RESET;
+	print_container("vector");
+	// std::cout << std::endl;
+	// print_container("deque");
 
-	// std::cout << "\nTime to process a range of " << _Vsize << " elements with std::vector<int> : " << _Vtime << " us" << std::endl;
-	// std::cout << "Time to process a range of " << _Dsize << " elements with std::deque<int> : " << _Dtime << " us" << std::endl;
+	std::cout << "\nTime to process a range of " << _Vsize << " elements with std::vector<int> : " << _Vtime << " us" << std::endl;
+	std::cout << "Time to process a range of " << _Dsize << " elements with std::deque<int> : " << _Dtime << " us" << std::endl;
 }
 
 void A::print_container(std::string container_type)
