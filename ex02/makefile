@@ -28,3 +28,8 @@ fclean: clean
 	rm -rf $(NAME)
 
 re: fclean all
+
+test: $(NAME)
+	make re
+	chmod +x test.sh
+	./test.sh

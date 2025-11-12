@@ -2,9 +2,10 @@
 
 int main(int argc, char **argv)
 {
+	(void)argv;
 	if (argc < 2)
 	{
-		std::cerr << "Error: not enough argv." << std::endl;
+		std::cerr << RED"Error: not enough argv."RESET << std::endl;
 		return 1;
 	}
 
