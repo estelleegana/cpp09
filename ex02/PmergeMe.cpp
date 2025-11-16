@@ -196,6 +196,7 @@ void A::sortDeque(std::deque<int> &D)
 
 
 //outils pr vector: suite de jacobstahl (0, 1, J(n-1) + 2J(n-2)...)
+//0, 1, 1, 3, 5, 11, 21, 43, 85, 171, 341, 683, 1365, 2731
 std::vector<size_t> A::jacobstahl(size_t n)
 {
 	std::vector<size_t> seq;
@@ -224,21 +225,26 @@ std::vector<size_t> A::ordreInsertion(size_t n)
     std::vector<size_t> ordre;
     std::vector<bool> used(n, false);
     
-    for (size_t i = 3; i < jacobsthalSeq.size(); ++i) {
+    for (size_t i = 3; i < jacobsthalSeq.size(); ++i)
+	{
         size_t jacobIdx = jacobsthalSeq[i];
         
         if (jacobIdx > n)
-            jacobIdx = n;
+            jacobIdx = n;//limiter jacobi a la taille des petits
         
-        if (jacobIdx > 0 && !used[jacobIdx - 1]) {
+        if (jacobIdx > 0 && !used[jacobIdx - 1])
+		{
             ordre.push_back(jacobIdx - 1);
             used[jacobIdx - 1] = true;
         }
         
-        if (i > 3) {
+        if (i > 3)
+		{
             size_t prevJacob = jacobsthalSeq[i - 1];
-            for (size_t j = jacobIdx - 1; j > prevJacob && j > 0; --j) {
-                if (!used[j - 1]) {
+            for (size_t j = jacobIdx - 1; j > prevJacob && j > 0; --j)
+			{
+                if (!used[j - 1])
+				{
                     ordre.push_back(j - 1);
                     used[j - 1] = true;
                 }
@@ -246,10 +252,11 @@ std::vector<size_t> A::ordreInsertion(size_t n)
         }
     }
     
-    for (size_t i = 0; i < n; ++i) {
-        if (!used[i]) {
+	//verifier que chaque petit s'est vu attribue un ordre
+    for (size_t i = 0; i < n; ++i)
+	{
+        if (!used[i])
             ordre.push_back(i);
-        }
     }
     
     return ordre;
